@@ -14,9 +14,14 @@ namespace Método_cramer
             Console.ReadKey();
         }
 
+        
         static double[] Cramer(double[,] matriz, double[] vector)
+        
+        
         {
-            double[] resultado = new double[3];      
+            
+            
+                double[] resultado = new double[3];      
             double[,] mDeterminante1 = new double[3,3];
             double[,] mDeterminante2 = new double[3,3];
             double[,] mDeterminante3 = new double[3,3];
@@ -41,24 +46,39 @@ namespace Método_cramer
             double determinanteSecundaria1 = Determinante(mDeterminante1);
             double determinanteSecundaria2 = Determinante(mDeterminante2);
             double determinanteSecundaria3 = Determinante(mDeterminante3);
-
+            try{
             resultado[0] = determinanteSecundaria1 / determinantePrincipal;
             resultado[1] = determinanteSecundaria2 / determinantePrincipal;
             resultado[2] = determinanteSecundaria3 / determinantePrincipal;
-
-            return resultado;
+                }
+            catch(System.DivideByZeroException)
+            {
+                Console.WriteLine("El determinante es 0, no hay solucion");
+             }
+            finally
+            {
+                return resultado;
+            }                  
+                
+            
+           
+            
         }
         static double Determinante(double[,] matriz)
         {
+            
+            
             double renglon1Positivo = matriz[0, 0] * matriz[1, 1] * matriz[2, 2];
             double renglon2Positivo = matriz[0, 1] * matriz[1, 2] * matriz[2, 0];
             double renglon3Positivo = matriz[0, 2] * matriz[1, 0] * matriz[2, 1];
             double renglon1Negativo = matriz[2, 0] * matriz[1, 1] * matriz[0, 2];
             double renglon2Negativo = matriz[2, 1] * matriz[1, 2] * matriz[0, 0];
             double renglon3Negativo = matriz[2, 2] * matriz[1, 0] * matriz[0, 1];
-
+            
             return (renglon1Positivo + renglon2Positivo + renglon3Positivo - renglon1Negativo - renglon2Negativo - renglon3Negativo);
+            
 
+            
         }
         static string ImprimirResultado(double[] resultado)
         {
@@ -82,6 +102,7 @@ namespace Método_cramer
             }
             Console.WriteLine(ImprimirResultado(Cramer(matriz, vector)));
         }
+        
 
     }
 }
