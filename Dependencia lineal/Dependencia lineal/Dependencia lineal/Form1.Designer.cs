@@ -58,6 +58,8 @@
             this.textBoxV11.Name = "textBoxV11";
             this.textBoxV11.Size = new System.Drawing.Size(33, 20);
             this.textBoxV11.TabIndex = 0;
+            this.textBoxV11.TextChanged += new System.EventHandler(this.textBoxV11_TextChanged);
+            this.textBoxV11.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV12
             // 
@@ -65,6 +67,7 @@
             this.textBoxV12.Name = "textBoxV12";
             this.textBoxV12.Size = new System.Drawing.Size(33, 20);
             this.textBoxV12.TabIndex = 1;
+            this.textBoxV12.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV13
             // 
@@ -72,6 +75,7 @@
             this.textBoxV13.Name = "textBoxV13";
             this.textBoxV13.Size = new System.Drawing.Size(33, 20);
             this.textBoxV13.TabIndex = 2;
+            this.textBoxV13.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV23
             // 
@@ -79,6 +83,7 @@
             this.textBoxV23.Name = "textBoxV23";
             this.textBoxV23.Size = new System.Drawing.Size(33, 20);
             this.textBoxV23.TabIndex = 5;
+            this.textBoxV23.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV22
             // 
@@ -86,6 +91,7 @@
             this.textBoxV22.Name = "textBoxV22";
             this.textBoxV22.Size = new System.Drawing.Size(33, 20);
             this.textBoxV22.TabIndex = 4;
+            this.textBoxV22.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV21
             // 
@@ -93,6 +99,7 @@
             this.textBoxV21.Name = "textBoxV21";
             this.textBoxV21.Size = new System.Drawing.Size(33, 20);
             this.textBoxV21.TabIndex = 3;
+            this.textBoxV21.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV33
             // 
@@ -100,6 +107,7 @@
             this.textBoxV33.Name = "textBoxV33";
             this.textBoxV33.Size = new System.Drawing.Size(33, 20);
             this.textBoxV33.TabIndex = 8;
+            this.textBoxV33.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV32
             // 
@@ -107,6 +115,7 @@
             this.textBoxV32.Name = "textBoxV32";
             this.textBoxV32.Size = new System.Drawing.Size(33, 20);
             this.textBoxV32.TabIndex = 7;
+            this.textBoxV32.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // textBoxV31
             // 
@@ -114,6 +123,7 @@
             this.textBoxV31.Name = "textBoxV31";
             this.textBoxV31.Size = new System.Drawing.Size(33, 20);
             this.textBoxV31.TabIndex = 6;
+            this.textBoxV31.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxV11_KeyPress);
             // 
             // buttonDependiente
             // 
