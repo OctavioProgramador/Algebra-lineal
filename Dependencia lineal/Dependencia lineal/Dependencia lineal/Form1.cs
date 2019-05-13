@@ -87,6 +87,14 @@ namespace Dependencia_lineal
             {
                 e.Handled = false;
             }
+            else if (e.KeyChar.Equals('-'))
+            {
+                e.Handled = false;
+            }
+            else if(e.KeyChar.Equals('.'))
+            {
+                e.Handled = false;
+            }
             else
             {
                 e.Handled = true;
