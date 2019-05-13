@@ -24,21 +24,31 @@ namespace Dependencia_lineal
 
         private void buttonDependiente_Click(object sender, EventArgs e)
         {
-            if (textBoxList.All(x => x.Text != ""))
+
+            try
             {
-                if (Determinante(GetMatrix(textBoxList)) == 0)
+
+
+                if (textBoxList.All(x => x.Text != ""))
                 {
-                    MessageBox.Show("El conjunto es linealmente dependiente");
+                    if (Determinante(GetMatrix(textBoxList)) == 0)
+                    {
+                        MessageBox.Show("El conjunto es linealmente dependiente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El conjunto es linealmente independiente");
+
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("El conjunto es linealmente independiente");
-
+                    MessageBox.Show("Rellene todos los campos por favor");
                 }
             }
-            else
+            catch(System.FormatException)
             {
-                MessageBox.Show("Rellene todos los campos por favor");
+                MessageBox.Show("Favor de introducir caracteres válidos","Error");
             }
         }
         static double Determinante(double[,] matriz)
@@ -54,18 +64,18 @@ namespace Dependencia_lineal
         }
 
         private double[,] GetMatrix(List<TextBox> list)
-        {
-            int index = 0;
-            double[,] temp = new double[3,3];
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
+        {            
+                int index = 0;
+                double[,] temp = new double[3, 3];
+                for (int i = 0; i < 3; i++)
                 {
-                    temp[i, j] = Convert.ToDouble(list[index].Text);
-                    index++;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        temp[i, j] = Convert.ToDouble(list[index].Text);
+                        index++;
+                    }
                 }
-            }
-            return temp;
+                return temp;                        
         }
 
         private void textBoxV11_TextChanged(object sender, EventArgs e)
