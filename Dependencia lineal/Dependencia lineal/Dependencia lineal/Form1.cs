@@ -110,5 +110,21 @@ namespace Dependencia_lineal
                 e.Handled = true;
             }
         }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            foreach (TextBox textbox in textBoxList)
+                textbox.Text = "";
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
