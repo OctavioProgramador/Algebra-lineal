@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 namespace Dependencia_lineal
 {
     public partial class Form1 : Form
-    {
+    { 
         List<TextBox> textBoxList;
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();           
             textBoxList = new List<TextBox>()
             {
                 textBoxV11,textBoxV12,textBoxV13,textBoxV21,textBoxV22,textBoxV23,textBoxV31,textBoxV32,textBoxV33
@@ -24,32 +22,7 @@ namespace Dependencia_lineal
 
         private void buttonDependiente_Click(object sender, EventArgs e)
         {
-
-            try
-            {
-
-
-                if (textBoxList.All(x => x.Text != ""))
-                {
-                    if (Determinante(GetMatrix(textBoxList)) == 0)
-                    {
-                        MessageBox.Show("El conjunto es linealmente dependiente");
-                    }
-                    else
-                    {
-                        MessageBox.Show("El conjunto es linealmente independiente");
-
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Rellene todos los campos por favor");
-                }
-            }
-            catch(System.FormatException)
-            {
-                MessageBox.Show("Favor de introducir caracteres válidos","Error");
-            }
+            ComprobateLinealDependence();           
         }
         static double Determinante(double[,] matriz)
         {
@@ -125,6 +98,63 @@ namespace Dependencia_lineal
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            //MessageBox.Show(e.FullPath+" cambió");
+            ReadText(e.FullPath);
+            ComprobateLinealDependence();
+        }
+
+        public void ReadText(string path)
+        {
+            int index = 0;
+            FileStream fl = new FileStream(path, FileMode.Open, FileAccess.Read);
+            StreamReader streamReader = new StreamReader(fl);
+            while (streamReader.Peek() != -1)
+            {            
+                string row = streamReader.ReadLine();
+
+                string[] columns = row.Split(',');
+                textBoxList[index].Text = columns[0].ToString().Remove(0,9);
+                index++;
+                textBoxList[index].Text = columns[1].ToString();
+                index++;
+                textBoxList[index].Text = columns[2].ToString().Remove(columns[2].Length-1);
+                index++;
+            }
+            streamReader.Close();
+            fl.Close();
+           
+        }
+        public void ComprobateLinealDependence()
+        {
+            try
+            {
+
+
+                if (textBoxList.All(x => x.Text != ""))
+                {
+                    if (Determinante(GetMatrix(textBoxList)) == 0)
+                    {
+                        MessageBox.Show("El conjunto es linealmente dependiente");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El conjunto es linealmente independiente");
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Rellene todos los campos por favor");
+                }
+            }
+            catch (System.FormatException)
+            {
+                MessageBox.Show("Favor de introducir caracteres válidos", "Error");
+            }
         }
     }
 }
