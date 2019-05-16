@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Dependencia_lineal
@@ -109,31 +108,47 @@ namespace Dependencia_lineal
 
         public void ReadText(string path)
         {
+            Thread.Sleep(10);
             int index = 0;
-            FileStream fl = new FileStream(path, FileMode.Open, FileAccess.Read);
-            StreamReader streamReader = new StreamReader(fl);
-            while (streamReader.Peek() != -1)
-            {            
-                string row = streamReader.ReadLine();
-
-                string[] columns = row.Split(',');
-                textBoxList[index].Text = columns[0].ToString().Remove(0,9);
-                index++;
-                textBoxList[index].Text = columns[1].ToString();
-                index++;
-                textBoxList[index].Text = columns[2].ToString().Remove(columns[2].Length-1);
-                index++;
+            FileStream fl = null;
+            StreamReader streamReader = null;
+            try
+            {
+                fl = new FileStream(path, FileMode.Open, FileAccess.Read);
+                streamReader = new StreamReader(fl);
+                while (streamReader.Peek() != -1)
+                {
+                    string row = streamReader.ReadLine();
+                    string[] columns = row.Split(',');
+                    textBoxList[index].Text = columns[0].ToString().Remove(0, 9);
+                    index++;
+                    textBoxList[index].Text = columns[1].ToString();
+                    index++;
+                    textBoxList[index].Text = columns[2].ToString().Remove(columns[2].Length - 1);
+                    index++;
+                }
             }
-            streamReader.Close();
-            fl.Close();
-           
+            catch (FileLoadException a)
+            {
+                MessageBox.Show(a.Message);
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                if (streamReader != null)
+                    streamReader.Close();
+                if (fl != null)
+                    fl.Close();
+            }                       
         }
+
         public void ComprobateLinealDependence()
         {
             try
             {
-
-
                 if (textBoxList.All(x => x.Text != ""))
                 {
                     if (Determinante(GetMatrix(textBoxList)) == 0)
