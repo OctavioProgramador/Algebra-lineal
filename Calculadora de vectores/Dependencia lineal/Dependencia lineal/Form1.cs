@@ -15,96 +15,10 @@ namespace Dependencia_lineal
             InitializeComponent();
             textBoxList = new List<TextBox>()
             {
-                txtboxI1,txtboxI2,txtboxI3,txtboxJ1,txtboxJ2,txtboxJ3,txtboxK1,txtboxK2,txtboxK3
+                txtboxI1,txtboxI2,txtboxResult,txtboxJ1,txtboxJ2,txtboxK1,txtboxK2
             };
         }
 
-        /* private void buttonDependiente_Click(object sender, EventArgs e)
-         {
-             ComprobateLinealDependence();           
-         }*/
-        /*static double Determinante(double[,] matriz)
-        {
-            double renglon1Positivo = matriz[0, 0] * matriz[1, 1] * matriz[2, 2];
-            double renglon2Positivo = matriz[0, 1] * matriz[1, 2] * matriz[2, 0];
-            double renglon3Positivo = matriz[0, 2] * matriz[1, 0] * matriz[2, 1];
-            double renglon1Negativo = matriz[2, 0] * matriz[1, 1] * matriz[0, 2];
-            double renglon2Negativo = matriz[2, 1] * matriz[1, 2] * matriz[0, 0];
-            double renglon3Negativo = matriz[2, 2] * matriz[1, 0] * matriz[0, 1];
-
-            return (renglon1Positivo + renglon2Positivo + renglon3Positivo - renglon1Negativo - renglon2Negativo - renglon3Negativo);
-        }*/
-
-        /*private double[,] GetMatrix(List<TextBox> list)
-        {            
-                int index = 0;
-                double[,] temp = new double[3, 3];
-                for (int i = 0; i < 3; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        temp[i, j] = Convert.ToDouble(list[index].Text);
-                        index++;
-                    }
-                }
-                return temp;                        
-        }*/
-
-        private void textBoxV11_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxV11_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (Char.IsDigit(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (Char.IsSeparator(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else if (e.KeyChar.Equals('-'))
-            {
-                e.Handled = false;
-            }
-            else if (e.KeyChar.Equals('.'))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonClear_Click(object sender, EventArgs e)
-        {
-            foreach (TextBox textbox in textBoxList)
-                textbox.Text = "";
-        }
-
-        private void buttonExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
-        {
-            //MessageBox.Show(e.FullPath+" cambió");
-            ReadText(e.FullPath);
-            //ComprobateLinealDependence();
-        }
 
         public void ReadText(string path)
         {
@@ -145,34 +59,57 @@ namespace Dependencia_lineal
             }
         }
 
-        /*public void ComprobateLinealDependence()
-        {
-            try
-            {
-                if (textBoxList.All(x => x.Text != ""))
-                {
-                    if (Determinante(GetMatrix(textBoxList)) == 0)
-                    {
-                        MessageBox.Show("El conjunto es linealmente dependiente");
-                    }
-                    else
-                    {
-                        MessageBox.Show("El conjunto es linealmente independiente");
-
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Rellene todos los campos por favor");
-                }
-            }
-            catch (System.FormatException)
-            {
-                MessageBox.Show("Favor de introducir caracteres válidos", "Error");
-            }
-        }*/
-
         //Handlers
+        private void textBoxV11_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxV11_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar.Equals('-'))
+            {
+                e.Handled = false;
+            }
+            else if (e.KeyChar.Equals('.'))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            foreach (TextBox textbox in textBoxList)
+                textbox.Text = "";
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            //MessageBox.Show(e.FullPath+" cambió");
+            ReadText(e.FullPath);
+            //ComprobateLinealDependence();
+        }
 
         private void btnSum_Click(object sender, EventArgs e)
         {
@@ -185,6 +122,7 @@ namespace Dependencia_lineal
             VectorSum(vector1, vector2).CopyTo(vectorSum, 0);
             SetVector(vectorSum);
         }
+
         private void btnSubs_Click(object sender, EventArgs e)
         {
             double[] vector1 = new double[3];
@@ -196,6 +134,7 @@ namespace Dependencia_lineal
             VectorSubs(vector1, vector2).CopyTo(vectorSum, 0);
             SetVector(vectorSum);
         }
+
         private void btnCross_Click(object sender, EventArgs e)
         {
             double[] vector1 = new double[3];
@@ -261,14 +200,16 @@ namespace Dependencia_lineal
         {
             return Math.Sqrt(Math.Pow(vector[1], 2) + Math.Pow(vector[2], 2) + Math.Pow(vector[0], 2));
         }
-        static double PointProduct(double[] vector1, double[] vector2)
+        void PointProduct(double[] vector1, double[] vector2)
         {
+            double result = 0;
             double[] product = new double[3];
             for (int i = 0; i < 3; i++)
             {
                 product[i] = vector1[i] * vector2[i];
             }
-            return product[1] + product[2] + product[0];
+            result = product[0] + product[1] + product[2];
+            txtboxResult.Text = result.ToString();
         }
         static double[] CrossProduct(double[] vector1, double[] vector2)
         {
@@ -280,11 +221,31 @@ namespace Dependencia_lineal
         }
         void SetVector(double[] vector)
         {
-            txtboxI3.Text = vector[0].ToString();
-            txtboxJ3.Text = vector[1].ToString();
-            txtboxK3.Text = vector[2].ToString();
+            txtboxResult.Text = VectorFormat("i", vector[0]) + VectorFormat("j", vector[1]) + VectorFormat("k", vector[2]);
+        }
+        public string VectorFormat(string axis, double number)
+        {
+            if (number >= 0)
+            {
+                return String.Format("+ {0}{1} ", number, axis);
+            }
+            else if (number < 0)
+            {
+                return String.Format("- {0}{1} ", Math.Abs(number), axis);
+            }
+            else
+            return "";
         }
 
-       
+        private void btnPoint_Click(object sender, EventArgs e)
+        {
+            double[] vector1 = new double[3];
+            double[] vector2 = new double[3];
+            double[] vectorCross = new double[3];
+
+            GetVector(txtboxI1, txtboxJ1, txtboxK1).CopyTo(vector1, 0);
+            GetVector(txtboxI2, txtboxJ2, txtboxK2).CopyTo(vector2, 0);
+            PointProduct(vector1, vector2);
+        }
     }
 }
